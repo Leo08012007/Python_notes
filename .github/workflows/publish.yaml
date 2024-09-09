@@ -1,6 +1,6 @@
 name: Publish Quatrtz
 env:
-  BLOG_REPO: mohankumarpaluru/curiosity-chronicles
+  BLOG_REPO: Leo08012007/thekeeperofthekeys
   PUBLISH_DIR: publish
 on:
   workflow_dispatch:
