@@ -1,0 +1,47 @@
+name: Publish Quatrtz
+env:
+  BLOG_REPO: mohankumarpaluru/curiosity-chronicles
+  PUBLISH_DIR: publish
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]        
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Obsidian Notes 
+        uses: actions/checkout@v4.1.4
+        with:
+          path: temp_md
+      - name: Checkout quartz-blog repo
+        uses: actions/checkout@v4.1.4
+        with:
+          path: temp_blog
+          repository: ${{ env.BLOG_REPO }}
+      - name: Move Files to content
+        run: |
+          rm -rf temp_blog/content && mkdir temp_blog/content
+          cp -r ./temp_md/* temp_blog/content
+          mv temp_blog/content/home.md temp_blog/content/index.md
+      - name: Move blog dir to currDir
+        run: |
+          cp -r temp_blog/. .
+          rm -rf temp_blog
+          rm -rf temp_md
+      - name: Setup Node
+        uses: actions/setup-node@v4.0.3
+        with:
+            node-version: 22
+      - name: Install Dependencies
+        run: npm ci
+      - name: Build Quartz
+        run:  npx quartz build
+      - name: Deploy Vercel
+        uses: amondnet/vercel-action@v25
+        with:
+          # TODO: Update Github Secrets with values
+          vercel-token: ${{ secrets.VERCEL_TOKEN }} # Required
+          vercel-org-id: ${{ secrets.VERCEL_ORG_ID }} # Required
+          vercel-project-id: ${{ secrets.VERCEL_QUARTZ_PROJECT_ID }} # Required
+          vercel-args: "--prod" #Optional
