@@ -41,7 +41,7 @@ jobs:
         uses: amondnet/vercel-action@v25
         with:
           # TODO: Update Github Secrets with values
-          vercel-token: ${{ secrets.VERCEL_TOKEN }} # Required
-          vercel-org-id: ${{ secrets.VERCEL_ORG_ID }} # Required
-          vercel-project-id: ${{ secrets.VERCEL_QUARTZ_PROJECT_ID }} # Required
+          vercel-token: 1eUqfb9x1BdxOxGYEb6EXMR5
+          vercel-org-id: UMxXlRHi5nNgXGcmSbZq8h77 
+          vercel-project-id: prj_e1eYVLoJrhSsPmn7q61CegVctwiI 
           vercel-args: "--prod" #Optional
