@@ -169,5 +169,5 @@ mode_button = tk.Button(btn_frame, text="Mode: Vs Computer", font=("Poppins", 12
                         bg="#2196F3", fg="white", width=15, command=toggle_mode)
 mode_button.grid(row=0, column=1, padx=10)
 
-# Run the window
+# Run the window..
 root.mainloop()
